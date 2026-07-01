@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>7NORTHEAST — Color System</title>
+<style>
+  :root{
+    --base:#8C2324;
+    --base-tint-1:#a3292b;
+    --base-tint-2:#d65c5e;
+    --base-tint-3:#edb6b7;
+    --base-shade-1:#5a1618;
+    --base-shade-2:#291e1f;
+    --accent:#238C8A;
+    --accent-soft:#5cbcbb;
+    --gold:#b5893a;
+    --cream:#f5f1ea;
+    --warm-white:#faf8f4;
+    --ink:#211a1a;
+    --rule:#d8cfc2;
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --sans: 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'SF Mono', 'Courier New', monospace;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--warm-white);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:64px 40px 100px;}
+
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:28px;
+    margin-bottom:56px;
+  }
+  .wordmark{
+    font-family:var(--serif);
+    font-size:44px;
+    letter-spacing:0.01em;
+    font-weight:700;
+    color:var(--base-shade-2);
+  }
+  .wordmark span{color:var(--base);}
+  .doc-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--base);
+    text-align:right;
+  }
+  .doc-label div:last-child{color:#8a7f6f;margin-top:4px;}
+
+  h2{
+    font-family:var(--serif);
+    font-size:26px;
+    margin:0 0 6px;
+    color:var(--base-shade-2);
+  }
+  .lede{
+    font-size:14.5px;
+    color:#5b5250;
+    max-width:640px;
+    margin:0 0 28px;
+  }
+  section{margin-bottom:64px;}
+  .rule-label{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+
+  /* Primary hero swatch */
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+  }
+  .hero-swatch{
+    background:var(--base);
+    min-height:220px;
+    display:flex;
+    align-items:flex-end;
+    padding:24px;
+  }
+  .hero-swatch .tag{
+    font-family:var(--mono);
+    color:#f3d9d9;
+    font-size:12px;
+    letter-spacing:0.08em;
+  }
+  .hero-info{padding:24px 28px;}
+  .hero-info h3{font-family:var(--serif);font-size:20px;margin:0 0 10px;}
+  .hero-info p{font-size:13.5px;color:#5b5250;margin:0 0 14px;}
+  .codes{
+    display:flex;
+    gap:22px;
+    font-family:var(--mono);
+    font-size:13px;
+    flex-wrap:wrap;
+  }
+  .codes div span{display:block;color:#9a8f85;font-size:10px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;}
+
+  /* Scale strip */
+  .scale{display:grid;grid-template-columns:repeat(9,1fr);border:1px solid var(--rule);}
+  .scale div{
+    height:96px;
+    position:relative;
+  }
+  .scale div .lbl{
+    position:absolute;bottom:6px;left:8px;
+    font-family:var(--mono);font-size:9.5px;
+    letter-spacing:0.02em;
+  }
+  .scale div .lbl.dark{color:#3a1414;}
+  .scale div .lbl.light{color:#f2e4e0;}
+
+  /* Palette grid */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);}
+  .swatch{background:var(--warm-white);padding:18px 16px;}
+  .swatch .chip{height:64px;margin-bottom:12px;border:1px solid rgba(0,0,0,0.06);}
+  .swatch h4{font-family:var(--serif);font-size:14.5px;margin:0 0 4px;}
+  .swatch .role{font-size:11px;color:#8a7f6f;margin-bottom:8px;}
+  .swatch .hex{font-family:var(--mono);font-size:11.5px;color:var(--ink);}
+
+  /* Relationship diagram */
+  .theory-row{display:grid;grid-template-columns:1fr 1fr;gap:36px;}
+  .theory-card{border:1px solid var(--rule);padding:22px;}
+  .theory-card h4{font-family:var(--serif);font-size:16px;margin:0 0 6px;}
+  .theory-card p{font-size:13px;color:#5b5250;margin:0 0 16px;}
+  .wheel-row{display:flex;gap:10px;align-items:center;}
+  .dot{width:40px;height:40px;border-radius:50%;border:2px solid var(--warm-white);box-shadow:0 0 0 1px var(--rule);}
+  .arrow{color:#c7bcae;font-size:16px;}
+
+  /* Usage ratio bar */
+  .ratio-bar{display:flex;height:44px;border:1px solid var(--rule);overflow:hidden;margin-bottom:10px;}
+  .ratio-bar div{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:#fff;}
+  .ratio-legend{display:flex;gap:24px;font-size:12px;color:#5b5250;flex-wrap:wrap;}
+  .ratio-legend span{display:inline-flex;align-items:center;gap:6px;}
+  .ratio-legend i{width:10px;height:10px;display:inline-block;}
+
+  /* Accessibility table */
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--rule);}
+  th{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:0.08em;color:#8a7f6f;font-weight:400;}
+  .pill{
+    display:inline-block;padding:2px 9px;border-radius:2px;font-size:11px;font-family:var(--mono);
+  }
+  .pass{background:#e3efe1;color:#2f5a2a;}
+  .fail{background:#f4e0df;color:#8c2324;}
+  .sample{
+    width:120px;height:32px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:13px;
+  }
+
+  /* Do / dont */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .dd .card{padding:20px;border-left:3px solid var(--base);}
+  .dd .card.bad{border-left-color:#b0453a;opacity:0.85;}
+  .dd h5{font-family:var(--mono);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 8px;}
+  .dd p{font-size:13px;color:#5b5250;margin:0;}
+
+  footer{
+    border-top:1px solid var(--rule);
+    padding-top:20px;
+    font-family:var(--mono);
+    font-size:10.5px;
+    color:#9a8f85;
+    letter-spacing:0.04em;
+    display:flex;
+    justify-content:space-between;
+  }
+
+  @media(max-width:720px){
+    .hero{grid-template-columns:1fr;}
+    .grid{grid-template-columns:repeat(2,1fr);}
+    .theory-row{grid-template-columns:1fr;}
+    .scale{grid-template-columns:repeat(5,1fr);}
+    .scale div:nth-child(n+6){display:none;}
+    .dd{grid-template-columns:1fr;}
+    header{flex-direction:column;align-items:flex-start;gap:14px;}
+    .doc-label{text-align:left;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="wordmark">7<span>NORTHEAST</span></div>
+    <div class="doc-label">
+      <div>Color System / v1</div>
+      <div>Extracted from source mark, 01 Jul 2026</div>
+    </div>
+  </header>
+
+  <section>
+    <div class="rule-label">01 — Primary</div>
+    <h2>7NE Oxblood</h2>
+    <p class="lede">Sampled directly from the brand mark. It reads as brick, leather, and cast iron — the material palette of the Northeast rather than a generic "brand red." Deep enough to feel permanent, warm enough to stay inviting.</p>
+    <div class="hero">
+      <div class="hero-swatch">
+        <div class="tag">PRIMARY / 60% OF ANY COMPOSITION</div>
+      </div>
+      <div class="hero-info">
+        <h3>Oxblood — #8C2324</h3>
+        <p>Use as the dominant color for wordmark, primary buttons, and key brand moments. At full saturation it should appear once per composition, not scattered.</p>
+        <div class="codes">
+          <div><span>HEX</span>#8C2324</div>
+          <div><span>RGB</span>140, 35, 36</div>
+          <div><span>HSL</span>359°, 60%, 34%</div>
+          <div><span>CMYK</span>0, 75, 74, 45</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule-label">02 — Tonal Scale</div>
+    <h2>Tints &amp; Shades</h2>
+    <p class="lede">One hue, held constant, moved only in lightness. This is how the red stretches to do more jobs — backgrounds, hover states, dark mode — without ever feeling like a second color.</p>
+    <div class="scale">
+      <div style="background:#f7dedf"><span class="lbl dark">50 · f7dedf</span></div>
+      <div style="background:#edb6b7"><span class="lbl dark">100 · edb6b7</span></div>
+      <div style="background:#e08586"><span class="lbl dark">200 · e08586</span></div>
+      <div style="background:#d65c5e"><span class="lbl dark">300 · d65c5e</span></div>
+      <div style="background:#cc3336"><span class="lbl light">400 · cc3336</span></div>
+      <div style="background:#8C2324"><span class="lbl light">500 · 8c2324 — BASE</span></div>
+      <div style="background:#721d1e"><span class="lbl light">600 · 721d1e</span></div>
+      <div style="background:#5a1618"><span class="lbl light">700 · 5a1618</span></div>
+      <div style="background:#291e1f"><span class="lbl light">900 · 291e1f</span></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule-label">03 — Supporting Palette</div>
+    <h2>Full Token Set</h2>
+    <p class="lede">Six colors, each with a job. Nothing here competes with the oxblood — the accent and gold exist to punctuate it, not rival it.</p>
+    <div class="grid">
+      <div class="swatch">
+        <div class="chip" style="background:#8C2324"></div>
+        <h4>Oxblood</h4>
+        <div class="role">Primary — brand, CTAs</div>
+        <div class="hex">#8C2324</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#291E1F"></div>
+        <h4>Iron</h4>
+        <div class="role">Ink — text, dark surfaces</div>
+        <div class="hex">#291E1F</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#238C8A"></div>
+        <h4>Verdigris</h4>
+        <div class="role">Accent — links, highlights</div>
+        <div class="hex">#238C8A</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#B5893A"></div>
+        <h4>Brass</h4>
+        <div class="role">Detail — dividers, icons</div>
+        <div class="hex">#B5893A</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#F5F1EA;border:1px solid #e5ddcf"></div>
+        <h4>Linen</h4>
+        <div class="role">Background — cards, sections</div>
+        <div class="hex">#F5F1EA</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#FAF8F4;border:1px solid #e5ddcf"></div>
+        <h4>Warm White</h4>
+        <div class="role">Background — base canvas</div>
+        <div class="hex">#FAF8F4</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#5A1618"></div>
+        <h4>Bordeaux</h4>
+        <div class="role">Shade — hover, pressed states</div>
+        <div class="hex">#5A1618</div>
+      </div>
+      <div class="swatch">
+        <div class="chip" style="background:#EDB6B7"></div>
+        <h4>Blush</h4>
+        <div class="role">Tint — subtle fills, tags</div>
+        <div class="hex">#EDB6B7</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule-label">04 — Color Theory</div>
+    <h2>Why These Pairings</h2>
+    <div class="theory-row">
+      <div class="theory-card">
+        <h4>Complementary — Verdigris</h4>
+        <div class="wheel-row">
+          <span class="dot" style="background:#8C2324"></span>
+          <span class="arrow">↔</span>
+          <span class="dot" style="background:#238C8A"></span>
+        </div>
+        <p style="margin-top:14px;">Oxblood sits at 359° on the wheel; its true complement lands near 179° — a weathered teal, the color of oxidized copper roofing common across Northeast architecture. Use sparingly (5–10%) as the one cool note against an otherwise warm palette: a link, a chart line, a single accent shape.</p>
+      </div>
+      <div class="theory-card">
+        <h4>Analogous — Brass</h4>
+        <div class="wheel-row">
+          <span class="dot" style="background:#8c5623"></span>
+          <span class="arrow">↔</span>
+          <span class="dot" style="background:#8C2324"></span>
+          <span class="arrow">↔</span>
+          <span class="dot" style="background:#8c2359"></span>
+        </div>
+        <p style="margin-top:14px;">Neighbors on the wheel (30° either side) stay harmonious because they share the same underlying warmth. Brass (29°) is the one worth keeping — it reads as hardware, rivets, cast fittings. The plum neighbor (329°) is shown for reference but isn't part of the working palette; two warm reds this close together compete rather than complement.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule-label">05 — Usage Ratio</div>
+    <h2>How Much of Each</h2>
+    <p class="lede">A working rule for any layout — packaging, deck, or site — so the brand stays recognizable without the red becoming overwhelming.</p>
+    <div class="ratio-bar">
+      <div style="background:#FAF8F4;color:#8a7f6f;width:55%;">Warm White / Linen — 55%</div>
+      <div style="background:#291E1F;width:20%;">Iron — 20%</div>
+      <div style="background:#8C2324;width:18%;">Oxblood — 18%</div>
+      <div style="background:#238C8A;width:5%;">Verdigris — 5%</div>
+      <div style="background:#B5893A;width:2%;"></div>
+    </div>
+    <div class="ratio-legend">
+      <span><i style="background:#FAF8F4;border:1px solid #ddd"></i>Field &amp; background</span>
+      <span><i style="background:#291E1F"></i>Text &amp; structure</span>
+      <span><i style="background:#8C2324"></i>Brand moments</span>
+      <span><i style="background:#238C8A"></i>Accent / interaction</span>
+      <span><i style="background:#B5893A"></i>Fine detail</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="rule-label">06 — Accessibility</div>
+    <h2>Contrast Reference</h2>
+    <p class="lede">WCAG 2.1 contrast ratios for the pairings you'll actually type in. AA requires 4.5:1 for body text, 3:1 for large text (18px+ bold or 24px+ regular).</p>
+    <table>
+      <tr><th>Pairing</th><th>Sample</th><th>Ratio</th><th>Result</th></tr>
+      <tr>
+        <td>Oxblood on Warm White</td>
+        <td><div class="sample" style="background:#FAF8F4;color:#8C2324;">Aa 7NE</div></td>
+        <td>8.8 : 1</td>
+        <td><span class="pill pass">AAA — body text</span></td>
+      </tr>
+      <tr>
+        <td>Warm White on Oxblood</td>
+        <td><div class="sample" style="background:#8C2324;color:#FAF8F4;">Aa 7NE</div></td>
+        <td>8.8 : 1</td>
+        <td><span class="pill pass">AAA — body text</span></td>
+      </tr>
+      <tr>
+        <td>Warm White on Iron</td>
+        <td><div class="sample" style="background:#291E1F;color:#FAF8F4;">Aa 7NE</div></td>
+        <td>16.2 : 1</td>
+        <td><span class="pill pass">AAA — body text</span></td>
+      </tr>
+      <tr>
+        <td>Oxblood on Iron</td>
+        <td><div class="sample" style="background:#291E1F;color:#8C2324;">Aa 7NE</div></td>
+        <td>1.8 : 1</td>
+        <td><span class="pill fail">Fail — decorative only</span></td>
+      </tr>
+      <tr>
+        <td>Verdigris on Warm White</td>
+        <td><div class="sample" style="background:#FAF8F4;color:#0d6a68;">Aa 7NE</div></td>
+        <td>4.1 : 1</td>
+        <td><span class="pill pass">AA — large text / UI only</span></td>
+      </tr>
+    </table>
+  </section>
+
+  <section style="margin-bottom:0;">
+    <div class="rule-label">07 — Application</div>
+    <h2>Do / Don't</h2>
+    <div class="dd">
+      <div class="card">
+        <h5>Do</h5>
+        <p>Let Oxblood carry the wordmark and one hero moment per page. Surround it with Linen or Warm White so it reads as a considered accent, not a wash of color.</p>
+      </div>
+      <div class="card bad">
+        <h5>Don't</h5>
+        <p>Fill entire backgrounds with full-strength Oxblood behind body copy — at that scale it turns heavy and hard to read. Use the 700/900 shades for large dark fields instead.</p>
+      </div>
+      <div class="card">
+        <h5>Do</h5>
+        <p>Use Verdigris only for interactive or informational elements — links, active states, a single chart series. It should feel like a discovery, not a co-equal brand color.</p>
+      </div>
+      <div class="card bad">
+        <h5>Don't</h5>
+        <p>Pair Oxblood directly with the 329° plum neighbor shown in section 04. Two warm reds of similar intensity fight for attention instead of settling into a hierarchy.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>7NORTHEAST — BRAND COLOR SYSTEM</div>
+    <div>PRIMARY #8C2324</div>
+  </footer>
+
+</div>
+</body>
+</html>
